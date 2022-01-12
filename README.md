@@ -1,3 +1,20 @@
+# Trilogy fork - Amazon Athena Query Federation
+
+The awslabs / Amazon Athena repo is forked into trilogy-group for purpose of building and publishing Athena JDBC Connector jar, for use in our Devflows Athena adapters.
+
+The key project for JDBC Connector is
+- athena-jdbc
+
+Review the Readme in this project for usage and building instructions.
+
+It depends on general projects, most importantly on:
+- athena-federation-sdk
+- athena-federation-integ-test
+
+#####The process is as follows:
+- Run Github action to build and publish the jdbc jar
+- In an adapter deployment process, use the published jar to deploy the lambda
+
 # Amazon Athena Query Federation
 
 [![Build Status](https://github.com/awslabs/aws-athena-query-federation/workflows/Java%20CI%20Push/badge.svg)](https://github.com/awslabs/aws-athena-query-federation/actions)
