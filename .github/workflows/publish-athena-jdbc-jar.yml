@@ -1,6 +1,9 @@
 name: Publish athena-jdbc jar to S3
 
 on:
+  push:
+  pull_request:
+    types: [ ready_for_review, opened, synchronize, reopened, labeled ]
   workflow_dispatch:
     branches:
       - '**'
