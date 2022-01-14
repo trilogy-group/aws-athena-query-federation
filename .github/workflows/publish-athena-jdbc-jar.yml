@@ -1,7 +1,12 @@
-# This workflow deploys main to dev.
 name: Publish athena-jdbc jar to S3
 
 on:
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '.gitpod.yml'
+    branches: [ main ]
+    types: [ ready_for_review, opened, synchronize, reopened, labeled ]
   workflow_dispatch:
     branches:
       - '**'
