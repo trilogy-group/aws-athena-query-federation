@@ -1,0 +1,44 @@
+name: Publish athena-jdbc jar to S3 - ITEST
+
+on:
+  workflow_dispatch:
+    branches:
+      - '**'
+
+# Environment variables can be overridden in .github/env
+env:
+  MAIN_PREFIX: main
+  GITHUB_TOKEN: ${{ secrets.ENG_STD_TOKEN }}
+  VPN_USERNAME: ${{ secrets.VPN_USERNAME }}
+  VPN_PASSWORD: ${{ secrets.VPN_PASSWORD }}
+  VPN_AUTH_CODE: ${{ secrets.VPN_AUTH_CODE }}
+  VPN_CLIENT_VERSION: 9.3.5-4367
+  AWS_REGION: us-east-1
+
+jobs:
+  publish-jar:
+    name: Publish athena-jdbc jar to S3 - ITEST
+    if: github.repository == 'trilogy-group/aws-athena-query-federation'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check AWS settings
+        env:
+          MANAGED_LAMBDA_AWS_ACCESS_KEY_ID: ${{ secrets.DEVFLOWS_ITEST_AWS_ACCESS_KEY_ID }}
+          MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY: ${{ secrets.DEVFLOWS_ITEST_AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+        if: |
+          env.MANAGED_LAMBDA_AWS_ACCESS_KEY_ID == null ||
+          env.MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY == null
+        run: echo "::error ::AWS is not setup, see https://git.io/JYm77"; exit 1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Configure Managed AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.DEVFLOWS_ITEST_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.DEVFLOWS_ITEST_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Publish jar
+        run: |
+          chmod 755 ./.github/scripts/publish-athena-jdbc-jar-itest.sh
+          ./.github/scripts/publish-athena-jdbc-jar-itest.sh
