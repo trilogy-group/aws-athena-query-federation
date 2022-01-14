@@ -15,6 +15,13 @@ It depends on general projects, most importantly on:
 - Run Github action to build and publish the jdbc jar
 - In an adapter deployment process, use the published jar to deploy the lambda
 
+#####Jar publish actions:
+We have two actions:
+- publish-athena-jdbc-jar.yml
+- publish-athena-jdbc-jar-itest.yml
+
+They are configured to be run manually, because there will be no activity in this repo except for publishing the jar, and we don't expect frequent updates to the repo from amazon side.
+
 # Amazon Athena Query Federation
 
 [![Build Status](https://github.com/awslabs/aws-athena-query-federation/workflows/Java%20CI%20Push/badge.svg)](https://github.com/awslabs/aws-athena-query-federation/actions)
