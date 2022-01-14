@@ -1,9 +1,6 @@
 name: Publish athena-jdbc jar to S3 - ITEST
 
 on:
-  push:
-  pull_request:
-    types: [ ready_for_review, opened, synchronize, reopened, labeled ]
   workflow_dispatch:
     branches:
       - '**'
@@ -26,12 +23,12 @@ jobs:
     steps:
       - name: Check AWS settings
         env:
-          MANAGED_AWS_ACCESS_KEY_ID: ${{ secrets.DEVFLOWS_ITEST_AWS_ACCESS_KEY_ID }}
-          MANAGED_AWS_SECRET_ACCESS_KEY: ${{ secrets.DEVFLOWS_ITEST_AWS_SECRET_ACCESS_KEY }}
+          MANAGED_LAMBDA_AWS_ACCESS_KEY_ID: ${{ secrets.DEVFLOWS_ITEST_AWS_ACCESS_KEY_ID }}
+          MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY: ${{ secrets.DEVFLOWS_ITEST_AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
         if: |
-          env.MANAGED_AWS_ACCESS_KEY_ID == null ||
-          env.MANAGED_AWS_SECRET_ACCESS_KEY == null
+          env.MANAGED_LAMBDA_AWS_ACCESS_KEY_ID == null ||
+          env.MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY == null
         run: echo "::error ::AWS is not setup, see https://git.io/JYm77"; exit 1
       - name: Checkout repository
         uses: actions/checkout@v2
