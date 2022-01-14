@@ -1,9 +1,6 @@
 name: Publish athena-jdbc jar to S3 - ITEST
 
 on:
-  push:
-  pull_request:
-    types: [ ready_for_review, opened, synchronize, reopened, labeled ]
   workflow_dispatch:
     branches:
       - '**'
@@ -43,5 +40,5 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Publish jar
         run: |
-          chmod 755 ./.github/scripts/publish-athena-jdbc-jar.sh
-          ./.github/scripts/publish-athena-jdbc-jar.sh
+          chmod 755 ./.github/scripts/publish-athena-jdbc-jar-itest.sh
+          ./.github/scripts/publish-athena-jdbc-jar-itest.sh
