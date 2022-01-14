@@ -29,17 +29,17 @@ jobs:
           MANAGED_AWS_ACCESS_KEY_ID: ${{ secrets.DEVFLOWS_ITEST_AWS_ACCESS_KEY_ID }}
           MANAGED_AWS_SECRET_ACCESS_KEY: ${{ secrets.DEVFLOWS_ITEST_AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
-          #DEVFLOWS_AWS_ACCESS_KEY_ID: ${{ secrets.DEVFLOWS_AWS_ACCESS_KEY_ID }}
-          #DEVFLOWS_AWS_SECRET_ACCESS_KEY: ${{ secrets.DEVFLOWS_AWS_SECRET_ACCESS_KEY }}
-          #MANAGED_LAMBDA_AWS_ACCESS_KEY_ID: ${{ secrets.MANAGED_LAMBDA_AWS_ACCESS_KEY_ID }}
-          #MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY }}
+          # DEVFLOWS_AWS_ACCESS_KEY_ID: ${{ secrets.DEVFLOWS_AWS_ACCESS_KEY_ID }}
+          # DEVFLOWS_AWS_SECRET_ACCESS_KEY: ${{ secrets.DEVFLOWS_AWS_SECRET_ACCESS_KEY }}
+          # MANAGED_LAMBDA_AWS_ACCESS_KEY_ID: ${{ secrets.MANAGED_LAMBDA_AWS_ACCESS_KEY_ID }}
+          # MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY }}
         if: |
           env.MANAGED_AWS_ACCESS_KEY_ID == null ||
           env.MANAGED_AWS_SECRET_ACCESS_KEY == null
-          #env.DEVFLOWS_AWS_ACCESS_KEY_ID == null ||
-          #env.DEVFLOWS_AWS_SECRET_ACCESS_KEY == null ||
-          #env.MANAGED_LAMBDA_AWS_ACCESS_KEY_ID == null ||
-          #env.MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY == null
+          # env.DEVFLOWS_AWS_ACCESS_KEY_ID == null ||
+          # env.DEVFLOWS_AWS_SECRET_ACCESS_KEY == null ||
+          # env.MANAGED_LAMBDA_AWS_ACCESS_KEY_ID == null ||
+          # env.MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY == null
         run: echo "::error ::AWS is not setup, see https://git.io/JYm77"; exit 1
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -52,8 +52,8 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.DEVFLOWS_ITEST_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.DEVFLOWS_ITEST_AWS_SECRET_ACCESS_KEY }}
-          #aws-access-key-id: ${{ secrets.MANAGED_LAMBDA_AWS_ACCESS_KEY_ID }}
-          #aws-secret-access-key: ${{ secrets.MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY }}
+          # aws-access-key-id: ${{ secrets.MANAGED_LAMBDA_AWS_ACCESS_KEY_ID }}
+          # aws-secret-access-key: ${{ secrets.MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       - name: Compute Tag
         run: |
