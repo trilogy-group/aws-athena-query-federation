@@ -17,4 +17,4 @@ ls -al
 cd ..
 mv ./athena-jdbc/target/athena-jdbc-*.jar ./athena-jdbc/target/athena-jdbc.jar
 
-aws s3 cp "./athena-jdbc/target/athena-jdbc.jar" s3://milan-managed-lambdas-test/
+aws s3 cp "./athena-jdbc/target/athena-jdbc.jar" s3://df-managed-lambdas/

@@ -1,6 +1,9 @@
 name: Publish athena-jdbc jar to S3
 
 on:
+  push:
+  pull_request:
+    types: [ ready_for_review, opened, synchronize, reopened, labeled ]
   workflow_dispatch:
     branches:
       - '**'
@@ -23,8 +26,8 @@ jobs:
     steps:
       - name: Check AWS settings
         env:
-          MANAGED_AWS_ACCESS_KEY_ID: ${{ secrets.DEVFLOWS_ITEST_AWS_ACCESS_KEY_ID }}
-          MANAGED_AWS_SECRET_ACCESS_KEY: ${{ secrets.DEVFLOWS_ITEST_AWS_SECRET_ACCESS_KEY }}
+          MANAGED_LAMBDA_AWS_ACCESS_KEY_ID: ${{ secrets.MANAGED_LAMBDA_AWS_ACCESS_KEY_ID }}
+          MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY: ${{ secrets.MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
         if: |
           env.MANAGED_AWS_ACCESS_KEY_ID == null ||
@@ -35,8 +38,8 @@ jobs:
       - name: Configure Managed AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.DEVFLOWS_ITEST_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.DEVFLOWS_ITEST_AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.MANAGED_LAMBDA_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.MANAGED_LAMBDA_AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       - name: Publish jar
         run: |
