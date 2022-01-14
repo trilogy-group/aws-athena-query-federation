@@ -35,10 +35,6 @@ jobs:
         run: echo "::error ::AWS is not setup, see https://git.io/JYm77"; exit 1
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Install dependencies
-        uses: trilogy-group/action-npm-install-dependencies@v1
-      - name: Build
-        run: npm run build
       - name: Configure Managed AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
